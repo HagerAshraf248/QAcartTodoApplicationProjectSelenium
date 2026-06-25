@@ -16,9 +16,16 @@ public class DriverFactory {
     public WebDriver initializeDriver(){
         String brower=System.getProperty("browser","CHROME");
         switch (brower){
-            case "CHROME":
+             case "CHROME":
                 WebDriverManager.chromedriver().setup();
-                 driver=new ChromeDriver();
+
+                ChromeOptions options = new ChromeOptions();
+                options.addArguments("--headless=new");
+                options.addArguments("--no-sandbox");
+                options.addArguments("--disable-dev-shm-usage");
+                options.addArguments("--window-size=1920,1080");
+
+                driver = new ChromeDriver(options);
                 break;
             case "FIREFOX" :
                 WebDriverManager.firefoxdriver().setup();
